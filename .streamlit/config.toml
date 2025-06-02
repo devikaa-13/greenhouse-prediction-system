@@ -1,0 +1,16 @@
+[theme]
+
+# This sets the background for the st.form_submit_button.
+primaryColor = "#FFFFFF"
+
+# This is the main background of the app's content area.
+backgroundColor = "#F5EFE0"
+
+# This is the background for widgets like st.selectbox.
+secondaryBackgroundColor = "#F7F7F7"
+
+# This is the color for all regular text.
+textColor = "#3A241D"
+
+# We can specify the font family here as well.
+font = "serif"
