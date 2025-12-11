@@ -1,0 +1,127 @@
+Phase 1: Set Up the GitHub Project (The Source)
+Create a Repository on GitHub:
+
+Go to GitHub.com and log in.
+
+Click the + icon (top right) -> New Repository.
+
+Repository name: jenkins-demo.
+
+Public/Private: Choose Public (Easiest, so you don't need credentials in Jenkins).
+
+Initialize with a README: Leave this UNCHECKED (Empty repo is better for this guide).
+
+Click Create repository.
+
+Copy the HTTPS URL (e.g., https://github.com/YOUR_USER/jenkins-demo.git).
+
+Set Up Local Project (Terminal): Open your Terminal and run these commands exactly as written:
+
+Create the folder:
+
+Bash
+
+cd ~/Documents
+mkdir Jenkins-Test-Project
+cd Jenkins-Test-Project
+Initialize Git:
+
+Bash
+
+git init
+Create a dummy file:
+
+Bash
+
+echo "<h1>Hello Jenkins</h1>" > index.html
+Connect to GitHub: (Replace the URL below with YOUR actual URL from Step 1)
+
+Bash
+
+git remote add origin https://github.com/YOUR_USER/jenkins-demo.git
+Push the first version:
+
+Bash
+
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git push -u origin main
+Phase 2: Set Up Jenkins (The Engine)
+Open Jenkins:
+
+Go to http://localhost:8080.
+
+Log in.
+
+Create the Job:
+
+Click New Item.
+
+Item Name: Demo-Build.
+
+Select Freestyle project.
+
+Click OK.
+
+Configure Source Code (Git):
+
+Scroll down to Source Code Management.
+
+Select Git.
+
+Repository URL: Paste the GitHub URL you used in Phase 1.
+
+Branch Specifier: Change */master to */main.
+
+Configure the Trigger (Automation):
+
+Scroll down to Build Triggers.
+
+Check the box: Poll SCM.
+
+Schedule: Enter five stars with spaces:
+
+Plaintext
+
+* * * * *
+Configure the Build Step (The Action):
+
+Scroll down to Build Steps.
+
+Click Add build step -> Select Execute shell.
+
+Command:
+
+Bash
+
+echo "Jenkins is successfully building!"
+ls -la
+Click Save.
+
+Phase 3: The Final Test (The Trigger)
+Now we prove it works.
+
+Back to Terminal: Ensure you are still inside your Jenkins-Test-Project folder.
+
+Make a Change: Add a new line to your file so Git sees a difference.
+
+Bash
+
+echo "Update for Jenkins Trigger" >> index.html
+Push the Change: Run the standard Git push sequence:
+
+Bash
+
+git add .
+git commit -m "Testing auto-build"
+git push origin main
+Watch Jenkins:
+
+Switch to your Jenkins browser tab.
+
+Don't click anything. Just watch the Build History on the left.
+
+Wait up to 60 seconds.
+
+A new build (e.g., #1) should appear automatically with a blue ball 🔵.
